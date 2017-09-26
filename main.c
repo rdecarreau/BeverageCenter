@@ -5,8 +5,16 @@
 #include "interrupt.h"
 #include "gpio.h"
 #include "timer.h"
+#include "fsm.h"
+
 int main(void)
 {
+	Main FridgeState;
+	MainCtor(&FridgeState);
+	// C compiler doesn't know FridgeState is derived from Fsm
+	// must explicitly "upcast" to Fsm
+	FsmInit((Fsm *)&FridgeState, 0);
+
 	unsigned long ulPeriod;
 	SysCtlClockSet(SYSCTL_SYSDIV_5|SYSCTL_USE_PLL|SYSCTL_XTAL_16MHZ|SYSCTL_OSC_MAIN);
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
@@ -51,5 +59,7 @@ void GPIOFIntHandler(void)
 	GPIOPinIntClear(GPIO_PORTF_BASE, GPIO_PIN_0|GPIO_PIN_4);
 	// Disable the timer
 	TimerIntDisable(TIMER0_BASE, TIMER_TIMA_TIMEOUT);
+	// Transition to door open
+	MainEvt.super_.sig = DOOR_OPEN_SIG;
+	FsmDispatch((Fsm *)&FridgeState, (Event *)&MainEvt);
 }
-

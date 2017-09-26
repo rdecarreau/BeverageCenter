@@ -10,6 +10,7 @@ ORDERED_OBJS += \
 $(GEN_CMDS__FLAG) \
 "./startup_ccs.obj" \
 "./main.obj" \
+"./Keyboard.obj" \
 -l"libc.a" \
 -l"C:\StellarisWare\driverlib\ccs-cm4f\Debug\driverlib-cm4f.lib" \
 "../lm4f120h5qr.cmd" \
@@ -124,8 +125,8 @@ BeverageStation.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 # Other Targets
 clean:
 	-$(RM) $(TMS470_EXECUTABLE_OUTPUTS__QUOTED) "BeverageStation.out"
-	-$(RM) "main.pp" "startup_ccs.pp" 
-	-$(RM) "main.obj" "startup_ccs.obj" 
+	-$(RM) "Keyboard.pp" "main.pp" "startup_ccs.pp" 
+	-$(RM) "Keyboard.obj" "main.obj" "startup_ccs.obj" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

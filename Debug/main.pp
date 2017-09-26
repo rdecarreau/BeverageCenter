@@ -9,6 +9,7 @@ main.obj: C:/StellarisWare/driverlib/interrupt.h
 main.obj: C:/StellarisWare/driverlib/gpio.h
 main.obj: C:/StellarisWare/driverlib/pin_map.h
 main.obj: C:/StellarisWare/driverlib/timer.h
+main.obj: ../fsm.h
 
 ../main.c: 
 C:/StellarisWare/inc/hw_ints.h: 
@@ -19,3 +20,4 @@ C:/StellarisWare/driverlib/interrupt.h:
 C:/StellarisWare/driverlib/gpio.h: 
 C:/StellarisWare/driverlib/pin_map.h: 
 C:/StellarisWare/driverlib/timer.h: 
+../fsm.h: 

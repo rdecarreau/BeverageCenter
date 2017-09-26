@@ -1,7 +1,7 @@
 ******************************************************************************
                   TMS470 Linker PC v4.9.5                      
 ******************************************************************************
->> Linked Sat Sep 23 13:20:31 2017
+>> Linked Mon Sep 25 22:36:24 2017
 
 OUTPUT FILE NAME:   <BeverageStation.out>
 ENTRY POINT SYMBOL: "_c_int00"  address: 000009b1
@@ -12,7 +12,7 @@ MEMORY CONFIGURATION
          name            origin    length      used     unused   attr    fill
 ----------------------  --------  ---------  --------  --------  ----  --------
   FLASH                 00000000   00040000  00000d00  0003f300  R  X
-  SRAM                  20000000   00008000  00000114  00007eec  RW X
+  SRAM                  20000000   00008000  0000011c  00007ee4  RW X
 
 
 SEGMENT ALLOCATION MAP
@@ -26,8 +26,9 @@ run origin  load origin   length   init length attrs members
   00000ce0    00000ce0    00000020   00000020    r-- .cinit
 20000000    20000000    00000100   00000000    rw-
   20000000    20000000    00000100   00000000    rw- .stack
-20000100    20000100    00000014   00000014    rw-
+20000100    20000100    00000020   00000014    rw-
   20000100    20000100    00000014   00000014    rw- .data
+  20000118    20000118    00000008   00000000    rw- .sysmem
 
 
 SECTION ALLOCATION MAP
@@ -95,6 +96,9 @@ section   page    origin      length       input sections
                   20000108    00000008                                   : exit.obj (.data)
                   20000110    00000004                                   : stkdepth_vars.obj (.data)
 
+.sysmem    0    20000118    00000008     UNINITIALIZED
+                  20000118    00000008     rtsv7M4_T_le_v4SPD16_eabi.lib : memory.obj (.sysmem)
+
 
 LINKER GENERATED COPY TABLES
 
@@ -144,6 +148,7 @@ UNDEFED    SHT$$INIT_ARRAY$$Limit
 20000100   __STACK_END
 00000100   __STACK_SIZE
 20000100   __STACK_TOP
+00000008   __SYSMEM_SIZE
 00000cf8   __TI_CINIT_Base
 00000d00   __TI_CINIT_Limit
 00000cf0   __TI_Handler_Table_Base
@@ -167,6 +172,7 @@ ffffffff   __c_args__
 00000ae5   _nop
 00000adf   _register_lock
 00000ad9   _register_unlock
+20000118   _sys_memory
 20000104   _unlock
 00000a41   abort
 ffffffff   binit
@@ -185,6 +191,7 @@ address    name
 00000000   __TI_static_base__
 00000000   g_pfnVectors
 00000001   __TI_args_main
+00000008   __SYSMEM_SIZE
 00000100   __STACK_SIZE
 0000026d   SysCtlClockGet
 00000445   SysCtlClockSet
@@ -240,10 +247,11 @@ address    name
 20000108   _cleanup_ptr
 2000010c   _dtors_ptr
 20000110   main_func_sp
+20000118   _sys_memory
 ffffffff   __binit__
 ffffffff   __c_args__
 ffffffff   binit
 UNDEFED    SHT$$INIT_ARRAY$$Base
 UNDEFED    SHT$$INIT_ARRAY$$Limit
 
-[63 symbols]
+[65 symbols]
